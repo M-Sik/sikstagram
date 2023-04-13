@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html,body {
+html,
+body {
+  /*  tip) */
   max-width: 100vw;
   overflow-x: hidden;
 }
