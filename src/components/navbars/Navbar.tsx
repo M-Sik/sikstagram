@@ -13,6 +13,7 @@ import ColorButton from '../buttons/ColorButton';
 // tip) oAuth 사용을 위해 사용 layout.tsx 파일 바디 하위에 AuthContext.tsx 컴포넌트로 감쌋기 때문에 사용 가능
 // client 컴포넌트에서만 사용 가능함
 import { useSession, signIn, signOut } from 'next-auth/react';
+import Avatar from '../avaters/Avatar';
 
 const menu = [
   {
@@ -35,6 +36,8 @@ const menu = [
 export default function Navbar() {
   const pathName = usePathname();
   const { data: session } = useSession();
+  // session이 있다면 그 안에 user의 정보를 넣어줌
+  const user = session?.user;
 
   return (
     <div className="flex justify-between items-center px-6">
@@ -48,11 +51,21 @@ export default function Navbar() {
               <Link href={href}>{pathName === href ? clickedIcon : icon}</Link>
             </li>
           ))}
-          {session ? (
-            <ColorButton text="Sign out" onClick={() => signOut()} />
-          ) : (
-            <ColorButton text="Sign in" onClick={() => signIn()} />
+          {/* user 정보가 있다면 && 뒤에꺼 실행 */}
+          {user && (
+            <li>
+              <Link href={`/user/${user.username}`}>
+                <Avatar image={user.image} />
+              </Link>
+            </li>
           )}
+          <li>
+            {session ? (
+              <ColorButton text="Sign out" onClick={() => signOut({ callbackUrl: '/' })} />
+            ) : (
+              <ColorButton text="Sign in" onClick={() => signIn()} />
+            )}
+          </li>
         </ul>
       </nav>
     </div>

@@ -1,7 +1,7 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     // 구글 oAuth를 사용하기 위해 구글 프로바이더 적용 키는 구글 클라우드에서 만듬
@@ -11,6 +11,21 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  // 로그인한 사용자의 정보를 받아오기 위해 callback 사용
+  callbacks: {
+    async session({ session, token }) {
+      console.log('세션 => ', session);
+      console.log('토큰 => ', token);
+      const user = session?.user;
+      if (user) {
+        session.user = {
+          ...user,
+          username: user.email?.split('@')[0] || '',
+        };
+      }
+      return session;
+    },
+  },
   // 커스텀 OAuth 로그인 페이지 구현을 위해 등록
   pages: {
     signIn: '/auth/signin',
