@@ -1,4 +1,4 @@
-import Navbar from '@/components/navbars/Navbar';
+import Navbar from '@/components/bars/Navbar';
 import './globals.css';
 import { Open_Sans } from 'next/font/google';
 import AuthContext from '@/context/AuthContext';
