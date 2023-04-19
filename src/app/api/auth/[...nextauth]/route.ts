@@ -10,7 +10,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_OAUTH_ID,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET,
     }),
-    // ...add more providers here
   ],
   // 로그인한 사용자의 정보를 받아오기 위해 callback 사용
   callbacks: {
@@ -25,8 +24,8 @@ export const authOptions: NextAuthOptions = {
     },
     // 세션이 만들어졌을 때 콜백
     async session({ session, token }) {
-      console.log('세션콜백 세션정보 => ', session);
-      console.log('세션콜백 토큰정보 => ', token);
+      // console.log('세션콜백 세션정보 => ', session);
+      // console.log('세션콜백 토큰정보 => ', token);
       const user = session?.user;
       if (user) {
         session.user = {
@@ -46,7 +45,6 @@ export const authOptions: NextAuthOptions = {
     // newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
   },
 };
-// export default NextAuth(authOptions)
 
 const handler = NextAuth(authOptions);
 

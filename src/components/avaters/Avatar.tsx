@@ -27,7 +27,7 @@ export default function Avatar({ image, size = 'normal', highlight = false }: IP
       <img
         alt="user profile"
         src={image ?? undefined}
-        className=" rounded-full p-[2px]"
+        className=" rounded-full w-full h-full object-cover p-[2px]"
         referrerPolicy="no-referrer"
       ></img>
     </div>
