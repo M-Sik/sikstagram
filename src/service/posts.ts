@@ -3,8 +3,8 @@ import { client, urlFor } from './sanity';
 
 const simplePostProjection = `
     ...,
-    "username": author.username,
-    "userImage": author.image,
+    "username": author->username,
+    "userImage": author->image,
     "image": photo,
     "likes": likes[].username,
     "text": comments[0].comment,
