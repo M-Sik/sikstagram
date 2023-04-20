@@ -16,16 +16,16 @@ export default function FollowingBar() {
   // tip) SWR 사용 => user
   const { data, isLoading, error } = useSWR<DetailUser>('/api/me');
   console.log('유저 이름으로 유저정보 조회 결과 => ', data);
-  // const users = data?.following;
+  const users = data?.following;
   // const users = undefined;
-  const users = data?.following && [
-    ...data?.following,
-    ...data?.following,
-    ...data?.following,
-    ...data?.following,
-    ...data?.following,
-    ...data?.following,
-  ];
+  // const users = data?.following && [
+  //   ...data?.following,
+  //   ...data?.following,
+  //   ...data?.following,
+  //   ...data?.following,
+  //   ...data?.following,
+  //   ...data?.following,
+  // ];
   return (
     <section className="w-full flex justify-center items-center p-4 shadow-sm shadow-gray-500 rounded-md min-h-[120px] overflow-x-auto">
       {isLoading ? (
