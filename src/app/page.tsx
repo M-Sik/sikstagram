@@ -12,6 +12,7 @@ export default async function Home() {
   const user = session?.user;
   // 유저가 없다면 로그인된것이 아니기때문에 로그인페이지로 이동
   if (!user) return redirect('/auth/signin');
+  console.log('??');
 
   return (
     <section className="w-full flex flex-col md:flex-row max-w-[850px] p-4 mx-auto">
