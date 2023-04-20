@@ -36,6 +36,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
       <ActionBar likes={likes} username={username} text={text} createdAt={createdAt} />
       <CommentForm />
       {openDialog && (
+        // tip) 최상위에 팝업을 띄우기 위해 만든 react portal 하위에 children react node를 넣어줘야함
         <PortalDialog>
           <PostDialog onClose={() => setOpenDialog(false)}>
             <div>포스트 상세페이지!!</div>

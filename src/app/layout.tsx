@@ -27,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
+        {/*  tip) react에서 제공해주는 포탈, PortalDialog.tsx파일 참고해야함 */}
         <div id="portal"></div>
       </body>
     </html>
