@@ -11,7 +11,7 @@ interface IProps {
 
 export default function GoogleAuthBtn({ providers, callbackUrl }: IProps) {
   return (
-    <>
+    <div>
       {Object.values(providers).map((provider) => (
         <ColorButton
           key={provider.id}
@@ -20,6 +20,6 @@ export default function GoogleAuthBtn({ providers, callbackUrl }: IProps) {
           size="big"
         />
       ))}
-    </>
+    </div>
   );
 }
