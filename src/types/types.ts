@@ -14,6 +14,11 @@ export type DetailUser = User & {
   bookmarks: string[];
 };
 
+export type ProfileUser = User & {
+  following: number;
+  followers: number;
+};
+
 export type Comment = {
   comment: string;
   username: string;

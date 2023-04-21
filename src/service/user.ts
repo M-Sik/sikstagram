@@ -1,3 +1,4 @@
+import { ProfileUser } from '@/types/types';
 import { client } from './sanity';
 
 type OAuthUser = {
@@ -43,9 +44,22 @@ export async function searchUsers(keyword?: string) {
   // 키워드가 없다면 유저 전체정보 가져옴
   const query = keyword ? `&& (name match "${keyword}") || (username match "${keyword}")` : '';
   // 검색된 결과에 정보를 다 가져오고(...) following, followers 키에는 각 카운트 값을 넣는다.
-  return client.fetch(`*[_type == "user" ${query}]{
+  return (
+    client
+      .fetch(
+        `*[_type == "user" ${query}]{
     ...,
     "following": count(following),
     "followers": count(followers),
-  }`);
+  }`,
+      )
+      // tip) user.following ?? 0 에서 ??은 앞에것이 null or undefined일 경우 ?? 뒤에것을 리턴
+      .then((users) =>
+        users.map((user: ProfileUser) => ({
+          ...user,
+          following: user.following ?? 0,
+          followers: user.followers ?? 0,
+        })),
+      )
+  );
 }
