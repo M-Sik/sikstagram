@@ -8,7 +8,7 @@ interface IProps {
 
 export default function SideBar({ user: { name, username, image } }: IProps) {
   return (
-    <article className=" !sticky top-[84px]">
+    <aside className=" !sticky top-[84px]">
       <div className="flex items-center ">
         {image && <Avatar image={image} />}
         <div className="ml-4">
@@ -20,6 +20,6 @@ export default function SideBar({ user: { name, username, image } }: IProps) {
         About • Help • Press • API • Jobs • Privacy • Terms • Location • Languege
       </p>
       <p className="font-bold text-sm mt-8 text-neutral-500">@Copyright SIKSTAGRAM from SIK</p>
-    </article>
+    </aside>
   );
 }
