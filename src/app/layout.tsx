@@ -17,13 +17,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={openSans.className}>
-      <body className=" w-full max-w-screen-xl mx-auto">
+      <body className="w-full h-screen bg-neutral-50 overflow-auto">
         {/* tip) 바디 하위 페이지 및 컴포넌트에서 auth정보를 사용하기 위해 사용 */}
         <AuthContext>
-          <header className=" sticky top-0 bg-white z-10 border-b">
-            <Navbar />
+          <header className="sticky top-0 bg-white z-10 border-b">
+            <div className=" max-w-screen-xl mx-auto">
+              <Navbar />
+            </div>
           </header>
-          <main className="w-full min-h-[calc(100vh-72.97px)] flex justify-center bg-neutral-50">
+          <main className="w-full flex justify-cente">
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
