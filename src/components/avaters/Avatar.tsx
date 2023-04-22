@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IProps {
   image?: string;
-  size?: 'small' | 'normal';
+  size?: 'small' | 'normal' | 'xlarge';
   highlight?: boolean;
 }
 
@@ -11,7 +11,8 @@ function getContainerStyle(size: string, highlight: boolean): string {
   const highlightStyle = highlight
     ? 'bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300'
     : '';
-  const sizeStype = size === 'small' ? 'w-9 h-9' : 'w-[68px] h-[68px]';
+  const sizeStype =
+    size === 'small' ? 'w-9 h-9' : size === 'normal' ? 'w-[68px] h-[68px]' : 'w-[132px] h-[132px]';
   return `${baseStyle} ${highlightStyle} ${sizeStype}`;
 }
 

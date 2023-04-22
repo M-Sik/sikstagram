@@ -19,7 +19,7 @@ export type SearchUser = AuthUser & {
   followers: number;
 };
 
-export type ProfileUser = SearchUser & { post: number };
+export type ProfileUser = SearchUser & { posts: number };
 
 export type Comment = {
   comment: string;
