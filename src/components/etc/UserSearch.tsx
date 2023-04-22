@@ -4,12 +4,19 @@ import React, { FormEvent, useState } from 'react';
 import useSWR from 'swr';
 import { PropagateLoader } from 'react-spinners';
 import UserCard from '../cards/UserCard';
+import useDebounce from '@/hooks/useDebounce';
 
 export default function UserSearch() {
   // 검색하는 키워드가 있다면 유저네임, 네임중 해당하는것을 보여줌
   // 검색하는 키워드가 없다면 전체 유저 보여줌
   const [keyword, setKeyword] = useState('');
-  const { data: users, isLoading, error } = useSWR<ProfileUser[]>(`/api/search/${keyword}`);
+  // tip) 디바운싱
+  const debouncedKeyword = useDebounce(keyword);
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
   console.log('유저 검색 결과 => ', users);
 
   const onSubmit = (e: FormEvent) => {
