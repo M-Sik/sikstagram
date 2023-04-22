@@ -1,6 +1,6 @@
 'use client';
 
-import { DetailUser } from '@/types/types';
+import { HomeUser } from '@/types/types';
 import Link from 'next/link';
 import React from 'react';
 import { PropagateLoader } from 'react-spinners';
@@ -14,7 +14,7 @@ export default function FollowingBar() {
   // 3. 백엔드에서 사용자의 상세 정보를 Sanity에서 가져옴(following)
   // 4. 클라이언트 컴포넌트에서 followings의 정보를 ui에 보여줌(image, username)
   // tip) SWR 사용 => user
-  const { data, isLoading, error } = useSWR<DetailUser>('/api/me');
+  const { data, isLoading, error } = useSWR<HomeUser>('/api/me');
   console.log('유저 이름으로 유저정보 조회 결과 => ', data);
   const users = data?.following;
   // const users = undefined;

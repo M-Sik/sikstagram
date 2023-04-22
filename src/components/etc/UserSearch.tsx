@@ -1,5 +1,5 @@
 'use client';
-import { ProfileUser } from '@/types/types';
+import { SearchUser } from '@/types/types';
 import React, { FormEvent, useState } from 'react';
 import useSWR from 'swr';
 import { PropagateLoader } from 'react-spinners';
@@ -12,11 +12,7 @@ export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
   // tip) 디바운싱
   const debouncedKeyword = useDebounce(keyword);
-  const {
-    data: users,
-    isLoading,
-    error,
-  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
+  const { data: users, isLoading, error } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
   console.log('유저 검색 결과 => ', users);
 
   const onSubmit = (e: FormEvent) => {

@@ -1,9 +1,9 @@
-import { User } from '@/types/types';
+import { AuthUser } from '@/types/types';
 import React from 'react';
 import Avatar from '../avaters/Avatar';
 
 interface IProps {
-  user: User;
+  user: AuthUser;
 }
 
 export default function SideBar({ user: { name, username, image } }: IProps) {

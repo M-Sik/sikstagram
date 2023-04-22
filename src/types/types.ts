@@ -1,4 +1,4 @@
-export type User = {
+export type AuthUser = {
   name: string;
   username: string;
   email: string;
@@ -6,18 +6,20 @@ export type User = {
 };
 
 // tip ) ts에서 Pick 사용 예시 => User타입정보에서 username과 image만 가져오겠따.
-export type SimpleUser = Pick<User, 'username' | 'image'>;
+export type SimpleUser = Pick<AuthUser, 'username' | 'image'>;
 
-export type DetailUser = User & {
+export type HomeUser = AuthUser & {
   following: SimpleUser[];
   followers: SimpleUser[];
   bookmarks: string[];
 };
 
-export type ProfileUser = User & {
+export type SearchUser = AuthUser & {
   following: number;
   followers: number;
 };
+
+export type ProfileUser = SearchUser & { post: number };
 
 export type Comment = {
   comment: string;
