@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import PostListCard from '../cards/PostListCard';
 import dynamic from 'next/dynamic';
 
-// 동적 import
+// tip) 동적 import
 const GridLoader = dynamic(() => import('react-spinners').then((lib) => lib.GridLoader), {
   ssr: false,
 });
