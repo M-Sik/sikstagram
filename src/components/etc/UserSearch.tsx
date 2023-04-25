@@ -35,7 +35,7 @@ export default function UserSearch() {
       </form>
       {error && <p>유저를 불러오는 중 오류가 발생하였습니다.</p>}
       {isLoading && <PropagateLoader className="mt-10" color="red" />}
-      {!isLoading && !error && users.length === 0 && <p>찾는 사용자가 없습니다.</p>}
+      {!isLoading && !error && users?.length === 0 && <p>찾는 사용자가 없습니다.</p>}
       <ul className="w-full px-3">
         {users &&
           users.map((user) => (

@@ -11,11 +11,12 @@ const MultiCarousel = ({ children }: Props) => {
   const IMG_WIDTH = 200;
   const slideRange = currentImgOrder * IMG_WIDTH;
   useEffect(() => {
+    if (MultiCarouselRef.current == null) return;
     MultiCarouselRef.current.style.transition = 'all 0.5s ease-in-out';
     MultiCarouselRef.current.style.transform = `translateX(-${slideRange}px)`;
-  }, [currentImgOrder]);
+  }, [currentImgOrder, slideRange]);
 
-  const MultiCarouselRef = useRef(null);
+  const MultiCarouselRef = useRef<HTMLDivElement>(null);
   const leftClick = () => {
     if (currentImgOrder === 0) return;
     setcCurrentImgOrder(currentImgOrder - 1);

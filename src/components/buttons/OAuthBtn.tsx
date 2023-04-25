@@ -1,25 +1,23 @@
 'use client';
 
 import { ClientSafeProvider, signIn } from 'next-auth/react';
-import React from 'react';
 import ColorButton from './ColorButton';
 
-interface IProps {
+type Props = {
   providers: Record<string, ClientSafeProvider>;
   callbackUrl: string;
-}
-
-export default function GoogleAuthBtn({ providers, callbackUrl }: IProps) {
+};
+export default function OAuthBtn({ providers, callbackUrl }: Props) {
   return (
-    <div>
-      {Object.values(providers).map((provider) => (
+    <>
+      {Object.values(providers).map(({ name, id }) => (
         <ColorButton
-          key={provider.id}
-          text={`Sign In with ${provider.name}`}
-          onClick={() => signIn(provider.id, { callbackUrl: callbackUrl })}
+          key={id}
+          text={`Sign In with ${name}`}
+          onClick={() => signIn(id, { callbackUrl })}
           size="big"
         />
       ))}
-    </div>
+    </>
   );
 }

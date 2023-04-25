@@ -61,7 +61,8 @@ export default function Navbar() {
           )}
           <li>
             {session ? (
-              <ColorButton text="Sign out" onClick={() => signOut({ callbackUrl: '/' })} />
+              // { callbackUrl: '/' } signOut함수에 넣어주면됨
+              <ColorButton text="Sign out" onClick={() => signOut()} />
             ) : (
               <ColorButton text="Sign in" onClick={() => signIn()} />
             )}

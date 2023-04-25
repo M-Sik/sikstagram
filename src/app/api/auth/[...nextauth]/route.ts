@@ -7,8 +7,8 @@ export const authOptions: NextAuthOptions = {
   providers: [
     // 구글 oAuth를 사용하기 위해 구글 프로바이더 적용 키는 구글 클라우드에서 만듬
     GoogleProvider({
-      clientId: process.env.GOOGLE_OAUTH_ID,
-      clientSecret: process.env.GOOGLE_OAUTH_SECRET,
+      clientId: process.env.GOOGLE_OAUTH_ID || '',
+      clientSecret: process.env.GOOGLE_OAUTH_SECRET || '',
     }),
   ],
   // 로그인한 사용자의 정보를 받아오기 위해 callback 사용
