@@ -2,7 +2,6 @@
 
 import { SimplePost } from '@/types/types';
 import React, { useState } from 'react';
-import Avatar from '../avaters/Avatar';
 import Image from 'next/image';
 import CommentForm from '../forms/CommentForm';
 import ActionBar from '../bars/ActionBar';
@@ -17,7 +16,7 @@ interface IProps {
 }
 
 export default function PostListCard({ post, priority = false }: IProps) {
-  const { userImage, username, image, createdAt, likes, text } = post;
+  const { userImage, username, image } = post;
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
@@ -32,7 +31,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
         priority={priority}
         onClick={() => setOpenDialog(true)}
       />
-      <ActionBar likes={likes} username={username} text={text} createdAt={createdAt} />
+      <ActionBar post={post} />
       <CommentForm />
       {openDialog && (
         // tip) 최상위에 팝업을 띄우기 위해 만든 react portal 하위에 children react node를 넣어줘야함

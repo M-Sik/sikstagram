@@ -31,9 +31,21 @@ export const authOptions: NextAuthOptions = {
         session.user = {
           ...user,
           username: user.email?.split('@')[0] || '',
+          id: token.id as string,
         };
       }
       return session;
+    },
+    // jwt 토큰이 만들어지거나 업데이트 되면 실행되는 함수
+    async jwt({ token, user }) {
+      console.log('jwt 콜백 token => ', token);
+      console.log('jwt 콜백 user => ', user);
+      if (user) {
+        // 유저 정보가 있다면 token에는 id값이 없기때문에
+        // token.id에 user.id 값을 넣어줌
+        token.id = user.id;
+      }
+      return token;
     },
   },
   // 커스텀 OAuth 로그인 페이지 구현을 위해 등록
