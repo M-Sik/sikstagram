@@ -10,6 +10,7 @@ import BookmarkFillIcon from '../icons/BookmarkFillIcon';
 import { SimplePost } from '@/types/types';
 import { useSession } from 'next-auth/react';
 import { useSWRConfig } from 'swr';
+import usePosts from '@/hooks/usePosts';
 
 interface IPorps {
   post: SimplePost;
@@ -24,16 +25,12 @@ export default function ActionBar({ post }: IPorps) {
   const liked = user ? likes.includes(user.username) : false;
 
   const [bookmarked, setBookmarked] = useState(false);
-  // tip) 좋아요로 인해 포스트에 정보가 바뀌었으므로 포스트 정보 갱신해줌 ex) mutate('/api/posts')
-  const { mutate } = useSWRConfig();
 
+  const { setLike } = usePosts();
   const handleLike = (like: boolean) => {
-    console.log('fafef => ', like);
-    // tip) get요청은 캐싱이 필요할 수 있기에 swr사용, 이외 put. patch, delete등 수정하는 요청은 fetch
-    fetch('/api/likes', {
-      method: 'PUT',
-      body: JSON.stringify({ id, like }),
-    }).then(() => mutate('/api/posts'));
+    if (user) {
+      setLike(post, user.username, like);
+    }
   };
 
   return (

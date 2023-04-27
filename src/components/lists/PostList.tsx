@@ -1,10 +1,8 @@
 'use client';
-import { SimplePost } from '@/types/types';
 import React from 'react';
-// import { GridLoader } from 'react-spinners';
-import useSWR from 'swr';
 import PostListCard from '../cards/PostListCard';
 import dynamic from 'next/dynamic';
+import usePosts from '@/hooks/usePosts';
 
 // tip) 동적 import
 const GridLoader = dynamic(() => import('react-spinners').then((lib) => lib.GridLoader), {
@@ -12,7 +10,7 @@ const GridLoader = dynamic(() => import('react-spinners').then((lib) => lib.Grid
 });
 
 export default function PostList() {
-  const { data: posts, isLoading: loading } = useSWR<SimplePost[]>('/api/posts');
+  const { posts, isLoading: loading } = usePosts();
   console.log('포스트 조회 결과 => ', posts);
 
   return (
