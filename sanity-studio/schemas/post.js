@@ -21,6 +21,7 @@ export default {
       of: [
         {
           type: 'reference',
+          // user의 id를 배열로 같는다. likes는
           to: [{type: 'user'}],
         },
       ],

@@ -82,3 +82,24 @@ export async function getUserForProfile(username: string) {
       posts: user.posts ?? 0,
     }));
 }
+
+export async function addBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId) // userId를 기준으로 패치함
+    .setIfMissing({ bookmarks: [] }) // 북마크 배열이 없다면 빈 배열로 설정
+    .append('bookmarks', [
+      // bookmarks 배열에 postId를 추가해줌
+      {
+        _ref: postId,
+        _type: 'reference',
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true }); // autoGenerateArrayKeys는 sanity db에 insert될때 자동으로 키를 만들어줌
+}
+
+export async function removeBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId)
+    .unset([`bookmarks[_ref=="${postId}"]`])
+    .commit();
+}

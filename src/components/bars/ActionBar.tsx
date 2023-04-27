@@ -11,26 +11,28 @@ import { SimplePost } from '@/types/types';
 import { useSession } from 'next-auth/react';
 import { useSWRConfig } from 'swr';
 import usePosts from '@/hooks/usePosts';
+import useMe from '@/hooks/useMe';
 
 interface IPorps {
   post: SimplePost;
 }
 
 export default function ActionBar({ post }: IPorps) {
-  const { id, likes, username, text, createdAt } = post;
-
-  const { data: session } = useSession();
-  const user = session?.user;
-  // session에서 로그인한 유저정보를 가져온 뒤 post -> like[]에 해당 유저가 있는지 판단 후 값 부여
-  const liked = user ? likes.includes(user.username) : false;
-
-  const [bookmarked, setBookmarked] = useState(false);
-
+  const { id: postId, likes, username, text, createdAt } = post;
   const { setLike } = usePosts();
+  const { user, setBookmark } = useMe();
+
+  // 유저정보를 가져온 뒤 post -> like[]에 해당 유저가 있는지 판단 후 값 부여
+  const liked = user ? likes.includes(user.username) : false;
+  // 북마크 배열에 postId가 들어있으면 true 아니면 false
+  const bookmarked = user?.bookmarks.includes(postId) ?? false;
+
   const handleLike = (like: boolean) => {
-    if (user) {
-      setLike(post, user.username, like);
-    }
+    // 유저가 있다면 setLike
+    user && setLike(post, user.username, like);
+  };
+  const handleBookmark = (bookmarked: boolean) => {
+    user && setBookmark(postId, bookmarked);
   };
 
   return (
@@ -44,7 +46,7 @@ export default function ActionBar({ post }: IPorps) {
         />
         <ToggleBtn
           toggled={bookmarked}
-          onToggle={setBookmarked}
+          onToggle={handleBookmark}
           onIcon={<BookmarkFillIcon />}
           offIcon={<BookmarkIcon />}
         />

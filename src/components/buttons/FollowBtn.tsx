@@ -1,8 +1,8 @@
 'use client';
 
-import { HomeUser, ProfileUser } from '@/types/types';
+import useMe from '@/hooks/useMe';
+import { ProfileUser } from '@/types/types';
 import React from 'react';
-import useSWR from 'swr';
 
 type Props = {
   user: ProfileUser;
@@ -13,7 +13,7 @@ export default function FollowBtn({ user }: Props) {
   // 2. 내가 팔로우 한 유저이면 unfollow 버튼이 나와야함
   // 3. 내가 팔로우 하지 않은 유저이면 follow 버튼이 나와야함
   const { username } = user;
-  const { data: loggedInUser } = useSWR<HomeUser>('/api/me');
+  const { user: loggedInUser } = useMe();
   console.log('팔로우 버튼에서 로그인한 유저 정보 받아온 결과 => ', loggedInUser);
 
   // 로그인한 유저가 있고 그 로그인 한 유저가 내가 아니라면 버튼을 보여줌
