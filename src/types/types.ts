@@ -4,6 +4,9 @@ export type AuthUser = {
   email: string;
   image?: string;
   id: string;
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: string;
 };
 
 // tip ) ts에서 Pick 사용 예시 => User타입정보에서 username과 image만 가져오겠따.
