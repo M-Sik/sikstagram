@@ -1,13 +1,10 @@
-import { FullPost, SimplePost } from '@/types/types';
+import { Comment, SimplePost } from '@/types/types';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import useSWR from 'swr';
+import React from 'react';
 import PostUserAvatar from '../avaters/PostUserAvatar';
 import ActionBar from '../bars/ActionBar';
-import CommentForm from '../forms/CommentForm';
 import Avatar from '../avaters/Avatar';
 import usePost from '@/hooks/usePost';
-import useMe from '@/hooks/useMe';
 
 type Props = {
   post: SimplePost;
@@ -16,13 +13,8 @@ type Props = {
 export default function PostDetailCard({ post }: Props) {
   const { id: postId, userImage, username, image } = post;
   const { post: data, postComment } = usePost(postId);
-  const { user } = useMe();
   const comments = data?.comments;
   console.log('포스트 상세조회 결과 => ', comments);
-
-  const onPostComment = (comment: string) => {
-    user && postComment({ username: user.username, image: user.image, comment });
-  };
 
   return (
     <section className="flex h-full ">
@@ -50,8 +42,7 @@ export default function PostDetailCard({ post }: Props) {
               </li>
             ))}
         </ul>
-        <ActionBar post={post} />
-        <CommentForm onPostComment={onPostComment} />
+        <ActionBar post={post} onComment={postComment} />
       </div>
     </section>
   );

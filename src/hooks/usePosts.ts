@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { SimplePost } from '@/types/types';
+import { Comment, SimplePost } from '@/types/types';
 
 async function updateLike(postId: string, like: boolean) {
   // tip) get요청은 캐싱이 필요할 수 있기에 swr사용, 이외 put. patch, delete등 수정하는 요청은 fetch
@@ -45,7 +45,7 @@ export default function usePosts() {
     });
   };
 
-  const postComment = (post: SimplePost, comment: string) => {
+  const postComment = (post: SimplePost, comment: Comment) => {
     // 새로운 포스트 객체를 만들고 이는 받아온 포스트 정보에 comments 값을 수정
     const newPost = {
       ...post,
@@ -54,7 +54,7 @@ export default function usePosts() {
     // 수정한 포스트를 전체 포스트에서 비교하여 수정한 포스트일 경우 newPost로 데이터 업데이트
     const newPosts = posts?.map((prevPost) => (prevPost.id === post.id ? newPost : prevPost));
 
-    return mutate(addComment(post.id, comment), {
+    return mutate(addComment(post.id, comment.comment), {
       optimisticData: newPosts,
       populateCache: false,
       revalidate: false,

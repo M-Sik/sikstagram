@@ -1,22 +1,22 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import HeartIcon from '../icons/HeartIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import { parseDate } from '@/util/date';
 import ToggleBtn from '../buttons/ToggleBtn';
 import HeartFillIcon from '../icons/HeartFillIcon';
 import BookmarkFillIcon from '../icons/BookmarkFillIcon';
-import { SimplePost } from '@/types/types';
+import { Comment, SimplePost } from '@/types/types';
 import usePosts from '@/hooks/usePosts';
 import useMe from '@/hooks/useMe';
+import CommentForm from '../forms/CommentForm';
 
 interface IPorps {
   post: SimplePost;
   children?: React.ReactNode;
+  onComment: (comment: Comment) => void;
 }
 
-export default function ActionBar({ post, children }: IPorps) {
+export default function ActionBar({ post, children, onComment }: IPorps) {
   const { id: postId, likes, createdAt } = post;
   const { setLike } = usePosts();
   const { user, setBookmark } = useMe();
@@ -32,6 +32,9 @@ export default function ActionBar({ post, children }: IPorps) {
   };
   const handleBookmark = (bookmarked: boolean) => {
     user && setBookmark(postId, bookmarked);
+  };
+  const handleComment = (comment: string) => {
+    user && onComment({ comment, username: user.username, image: user.image });
   };
 
   return (
@@ -55,6 +58,7 @@ export default function ActionBar({ post, children }: IPorps) {
         {children}
         <p className="mt-2 text-xs text-gray-700">{parseDate(createdAt)}</p>
       </div>
+      <CommentForm onPostComment={handleComment} />
     </>
   );
 }

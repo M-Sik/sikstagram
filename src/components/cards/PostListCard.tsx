@@ -1,9 +1,8 @@
 'use client';
 
-import { SimplePost } from '@/types/types';
+import { Comment, SimplePost } from '@/types/types';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import CommentForm from '../forms/CommentForm';
 import ActionBar from '../bars/ActionBar';
 import PortalDialog from '../dialogs/PortalDialog';
 import PostDialog from '../dialogs/PostDialog';
@@ -21,7 +20,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
   const [openDialog, setOpenDialog] = useState(false);
   const { postComment } = usePosts();
 
-  const onPostComment = (comment: string) => {
+  const onPostComment = (comment: Comment) => {
     postComment(post, comment);
   };
 
@@ -37,7 +36,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
         priority={priority}
         onClick={() => setOpenDialog(true)}
       />
-      <ActionBar post={post}>
+      <ActionBar post={post} onComment={onPostComment}>
         <p className="mt-2">
           <span className="font-bold mr-2">{username}</span>
           {text}
@@ -49,7 +48,6 @@ export default function PostListCard({ post, priority = false }: IProps) {
           >{`View all ${comments} comments`}</button>
         )}
       </ActionBar>
-      <CommentForm onPostComment={onPostComment} />
       {openDialog && (
         // tip) 최상위에 팝업을 띄우기 위해 만든 react portal 하위에 children react node를 넣어줘야함
         <PortalDialog>
