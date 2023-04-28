@@ -12,13 +12,13 @@ export async function PUT(req: NextRequest) {
     return new Response('Authentication Error', { status: 401 });
   }
   // req body에 내용을 json으로 풀어서 가져옴
-  const { id, like } = await req.json();
+  const { postId, like } = await req.json();
 
-  if (!id || like === undefined) return new Response('Bad Request', { status: 400 });
+  if (!postId || like === undefined) return new Response('Bad Request', { status: 400 });
 
   const request = like ? likePost : dislikePost;
 
-  return request(id, user.id)
+  return request(postId, user.id)
     .then((res) => NextResponse.json(res))
     .catch((error) => new Response(JSON.stringify(error), { status: 500 }));
 }

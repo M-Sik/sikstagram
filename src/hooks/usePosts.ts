@@ -1,11 +1,18 @@
 import useSWR from 'swr';
 import { SimplePost } from '@/types/types';
 
-async function updateLike(id: string, like: boolean) {
+async function updateLike(postId: string, like: boolean) {
   // tip) get요청은 캐싱이 필요할 수 있기에 swr사용, 이외 put. patch, delete등 수정하는 요청은 fetch
   return fetch('/api/likes', {
     method: 'PUT',
-    body: JSON.stringify({ id, like }),
+    body: JSON.stringify({ postId, like }),
+  }).then((res) => res.json());
+}
+async function addComment(postId: string, comment: string) {
+  // tip) get요청은 캐싱이 필요할 수 있기에 swr사용, 이외 put. patch, delete등 수정하는 요청은 fetch
+  return fetch('/api/comments', {
+    method: 'POST',
+    body: JSON.stringify({ postId, comment }),
   }).then((res) => res.json());
 }
 
@@ -14,10 +21,12 @@ export default function usePosts() {
   const { data: posts, isLoading, error, mutate } = useSWR<SimplePost[]>('/api/posts');
 
   const setLike = (post: SimplePost, username: string, like: boolean) => {
+    // 새로운 포스트 객체를 만들고 이는 받아온 포스트 정보에 likes값을 수정
     const newPost = {
       ...post,
       likes: like ? [...post.likes, username] : post.likes.filter((item) => item !== username),
     };
+    // 수정한 포스트를 전체 포스트에서 비교하여 수정한 포스트일 경우 newPost로 데이터 업데이트
     const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
 
     return mutate(updateLike(post.id, like), {
@@ -36,5 +45,22 @@ export default function usePosts() {
     });
   };
 
-  return { posts, isLoading, error, setLike };
+  const postComment = (post: SimplePost, comment: string) => {
+    // 새로운 포스트 객체를 만들고 이는 받아온 포스트 정보에 comments 값을 수정
+    const newPost = {
+      ...post,
+      comments: post.comments + 1,
+    };
+    // 수정한 포스트를 전체 포스트에서 비교하여 수정한 포스트일 경우 newPost로 데이터 업데이트
+    const newPosts = posts?.map((prevPost) => (prevPost.id === post.id ? newPost : prevPost));
+
+    return mutate(addComment(post.id, comment), {
+      optimisticData: newPosts,
+      populateCache: false,
+      revalidate: false,
+      rollbackOnError: true,
+    });
+  };
+
+  return { posts, isLoading, error, setLike, postComment };
 }

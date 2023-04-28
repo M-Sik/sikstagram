@@ -17,6 +17,8 @@ export default function PostDetailCard({ post }: Props) {
   const comments = data?.comments;
   console.log('포스트 상세조회 결과 => ', comments);
 
+  const onPostComment = (comment: string) => {};
+
   return (
     <section className="flex h-full ">
       <div className=" relative basis-3/5">
@@ -44,7 +46,7 @@ export default function PostDetailCard({ post }: Props) {
             ))}
         </ul>
         <ActionBar post={post} />
-        <CommentForm />
+        <CommentForm onPostComment={onPostComment} />
       </div>
     </section>
   );

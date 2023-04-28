@@ -9,6 +9,7 @@ import PortalDialog from '../dialogs/PortalDialog';
 import PostDialog from '../dialogs/PostDialog';
 import PostDetailCard from './PostDetailCard';
 import PostUserAvatar from '../avaters/PostUserAvatar';
+import usePosts from '@/hooks/usePosts';
 
 interface IProps {
   post: SimplePost;
@@ -18,6 +19,11 @@ interface IProps {
 export default function PostListCard({ post, priority = false }: IProps) {
   const { userImage, username, image, comments, text } = post;
   const [openDialog, setOpenDialog] = useState(false);
+  const { postComment } = usePosts();
+
+  const onPostComment = (comment: string) => {
+    postComment(post, comment);
+  };
 
   return (
     <article className="rounded-lg shadow-md border border-gray-200 mt-4">
@@ -43,7 +49,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
           >{`View all ${comments} comments`}</button>
         )}
       </ActionBar>
-      <CommentForm />
+      <CommentForm onPostComment={onPostComment} />
       {openDialog && (
         // tip) 최상위에 팝업을 띄우기 위해 만든 react portal 하위에 children react node를 넣어줘야함
         <PortalDialog>
