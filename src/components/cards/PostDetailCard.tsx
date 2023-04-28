@@ -6,18 +6,23 @@ import PostUserAvatar from '../avaters/PostUserAvatar';
 import ActionBar from '../bars/ActionBar';
 import CommentForm from '../forms/CommentForm';
 import Avatar from '../avaters/Avatar';
+import usePost from '@/hooks/usePost';
+import useMe from '@/hooks/useMe';
 
 type Props = {
   post: SimplePost;
 };
 
 export default function PostDetailCard({ post }: Props) {
-  const { id, userImage, username, image } = post;
-  const { data } = useSWR<FullPost>(`/api/posts/${id}`);
+  const { id: postId, userImage, username, image } = post;
+  const { post: data, postComment } = usePost(postId);
+  const { user } = useMe();
   const comments = data?.comments;
   console.log('포스트 상세조회 결과 => ', comments);
 
-  const onPostComment = (comment: string) => {};
+  const onPostComment = (comment: string) => {
+    user && postComment({ username: user.username, image: user.image, comment });
+  };
 
   return (
     <section className="flex h-full ">
@@ -33,7 +38,7 @@ export default function PostDetailCard({ post }: Props) {
       </div>
       <div className=" basis-2/5 flex flex-col">
         <PostUserAvatar userImage={userImage} username={username} />
-        <ul className="h-full border-t p-4 ">
+        <ul className="h-full border-t p-4 overflow-y-scroll">
           {comments &&
             comments.map(({ image, username: commentUsername, comment }, index) => (
               <li key={index} className="flex items-center mb-1">

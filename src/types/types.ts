@@ -28,7 +28,7 @@ export type ProfileUser = SearchUser & { posts: number };
 export type Comment = {
   comment: string;
   username: string;
-  image: string;
+  image?: string | undefined;
 };
 
 // tip) ts Omit => SimplePost라는 타입은 FullPost타입에서 comments키를 제거한 타입이라고 정의한것임
