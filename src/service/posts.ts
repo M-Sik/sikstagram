@@ -104,3 +104,20 @@ export async function dislikePost(postId: string, userId: string) {
     .unset([`likes[_ref=="${userId}"]`])
     .commit();
 }
+
+export async function addComment(postId: string, userId: string, comment: string) {
+  return client
+    .patch(postId) // postId를 기준으로 패치함(수정)
+    .setIfMissing({ comments: [] }) // comments가 없다면 빈 배열로 설정
+    .append('comments', [
+      {
+        author: {
+          // likes 배열에 userId를 추가해줌
+          _ref: userId,
+          _type: 'reference',
+        },
+        comment,
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true }); // autoGenerateArrayKeys는 sanity db에 insert될때 자동으로 키를 만들어줌
+}

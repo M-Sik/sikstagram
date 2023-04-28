@@ -8,17 +8,16 @@ import ToggleBtn from '../buttons/ToggleBtn';
 import HeartFillIcon from '../icons/HeartFillIcon';
 import BookmarkFillIcon from '../icons/BookmarkFillIcon';
 import { SimplePost } from '@/types/types';
-import { useSession } from 'next-auth/react';
-import { useSWRConfig } from 'swr';
 import usePosts from '@/hooks/usePosts';
 import useMe from '@/hooks/useMe';
 
 interface IPorps {
   post: SimplePost;
+  children?: React.ReactNode;
 }
 
-export default function ActionBar({ post }: IPorps) {
-  const { id: postId, likes, username, text, createdAt } = post;
+export default function ActionBar({ post, children }: IPorps) {
+  const { id: postId, likes, createdAt } = post;
   const { setLike } = usePosts();
   const { user, setBookmark } = useMe();
 
@@ -53,12 +52,7 @@ export default function ActionBar({ post }: IPorps) {
       </div>
       <div className="p-2">
         <p className="text-sm font-bold">좋아요 {`${likes?.length ?? 0}`}</p>
-        {text && (
-          <p className="mt-2">
-            <span className="font-bold mr-2">{username}</span>
-            {text}
-          </p>
-        )}
+        {children}
         <p className="mt-2 text-xs text-gray-700">{parseDate(createdAt)}</p>
       </div>
     </>

@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export default function PostListCard({ post, priority = false }: IProps) {
-  const { userImage, username, image } = post;
+  const { userImage, username, image, comments, text } = post;
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
@@ -31,7 +31,18 @@ export default function PostListCard({ post, priority = false }: IProps) {
         priority={priority}
         onClick={() => setOpenDialog(true)}
       />
-      <ActionBar post={post} />
+      <ActionBar post={post}>
+        <p className="mt-2">
+          <span className="font-bold mr-2">{username}</span>
+          {text}
+        </p>
+        {comments > 1 && (
+          <button
+            className=" font-bold text-sky-600 my-2"
+            onClick={() => setOpenDialog(true)}
+          >{`View all ${comments} comments`}</button>
+        )}
+      </ActionBar>
       <CommentForm />
       {openDialog && (
         // tip) 최상위에 팝업을 띄우기 위해 만든 react portal 하위에 children react node를 넣어줘야함
