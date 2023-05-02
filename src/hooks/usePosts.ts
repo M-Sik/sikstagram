@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import { Comment, SimplePost } from '@/types/types';
 import { useCallback } from 'react';
+import { useCacheKeys } from '@/context/CacheKeysContext';
 
 async function updateLike(postId: string, like: boolean) {
   // tip) get요청은 캐싱이 필요할 수 있기에 swr사용, 이외 put. patch, delete등 수정하는 요청은 fetch
@@ -18,8 +19,9 @@ async function addComment(postId: string, comment: string) {
 }
 
 export default function usePosts() {
+  const cacheKeys = useCacheKeys();
   // tip) 좋아요로 인해 포스트에 정보가 바뀌었으므로 포스트 정보 갱신해줌 ex) mutate('/api/posts')
-  const { data: posts, isLoading, error, mutate } = useSWR<SimplePost[]>('/api/posts');
+  const { data: posts, isLoading, error, mutate } = useSWR<SimplePost[]>(cacheKeys.postsKey);
 
   const setLike = useCallback(
     (post: SimplePost, username: string, like: boolean) => {

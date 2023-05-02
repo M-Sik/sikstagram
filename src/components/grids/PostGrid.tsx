@@ -1,21 +1,15 @@
-import { SimplePost } from '@/types/types';
 import React from 'react';
-import useSWR from 'swr';
 import dynamic from 'next/dynamic';
 import PostGridCard from '../cards/PostGridCard';
+import usePosts from '@/hooks/usePosts';
 
 // 동적 import
 const GridLoader = dynamic(() => import('react-spinners').then((lib) => lib.GridLoader), {
   ssr: false,
 });
 
-type Props = {
-  username: string;
-  query: string;
-};
-
-export default function PostGrid({ username, query }) {
-  const { data: posts, isLoading, error } = useSWR<SimplePost[]>(`/api/users/${username}/${query}`);
+export default function PostGrid() {
+  const { posts, isLoading } = usePosts();
   console.log('내가 쓴 포스트 조회 결과 => ', posts);
 
   return (
