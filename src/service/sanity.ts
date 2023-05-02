@@ -14,3 +14,5 @@ const builder = imageUrlBuilder(client);
 export function urlFor(source: SanityImageSource) {
   return builder.image(source).width(800).url();
 }
+// tip) image 이미지 업로드를 위해 사용
+export const assetsURL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2021-03-25/assets/images/${process.env.SANITY_DATASET}`;
