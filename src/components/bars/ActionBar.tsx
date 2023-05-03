@@ -24,7 +24,7 @@ export default function ActionBar({ post, children, onComment }: IPorps) {
   // 유저정보를 가져온 뒤 post -> like[]에 해당 유저가 있는지 판단 후 값 부여
   const liked = user ? likes.includes(user.username) : false;
   // 북마크 배열에 postId가 들어있으면 true 아니면 false
-  const bookmarked = user?.bookmarks.includes(postId) ?? false;
+  const bookmarked = user?.bookmarks?.includes(postId) ?? false;
 
   const handleLike = (like: boolean) => {
     // 유저가 있다면 setLike

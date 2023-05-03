@@ -28,7 +28,7 @@ export default function FollowBtn({ user }: Props) {
   const showBtn = loggedInUser && loggedInUser.username !== username;
   // 로그인한 유저가 있고 그 로그인한 유저가 팔로우를 했으면 true, 아니면 false
   const following =
-    loggedInUser && loggedInUser.following.find((item) => item.username === username);
+    loggedInUser && loggedInUser.following?.find((item) => item.username === username);
   const btnText = following ? 'Unfollow' : 'Follow';
 
   const handleFollow = async () => {
