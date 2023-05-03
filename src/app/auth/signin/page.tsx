@@ -19,7 +19,7 @@ interface IProps {
 export default async function SignPage({ searchParams: { callbackUrl } }: IProps) {
   //tip) app/api/auth/[...nextauth]/route 에 있는 authOptions를 가져옴
   const session = await getServerSession(authOptions);
-  console.log('searchParms => ', callbackUrl);
+  // console.log('searchParms => ', callbackUrl);
   if (session) {
     redirect('/');
   }

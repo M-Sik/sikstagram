@@ -19,6 +19,7 @@ export default async function SignUpPage({ searchParams: { email, name } }: Prop
     <div>
       <div>{email}</div>
       <div>{name}</div>
+      <div>gdgd</div>
     </div>
   );
 }

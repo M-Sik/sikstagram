@@ -16,8 +16,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // 로그인이 되었을 때 콜백
     async signIn({ user: { id, name, image, email }, account }) {
-      console.log('로그인 콜백 user => ', id, name?.length, image, email);
-      console.log('로그인 콜백 account => ', account);
+      // console.log('로그인 콜백 user => ', id, name?.length, image, email);
+      // console.log('로그인 콜백 account => ', account);
       // tip) 회원가입 한 유저인지 판단 후 리다이렉트 가능
       if (account?.provider === 'google' && false) {
         const encodedEmail = encodeURIComponent(email as string);
@@ -34,8 +34,8 @@ export const authOptions: NextAuthOptions = {
     // ClientSide에서 NextAuth에 세션을 체크할때마다 실행
     //  * 반환된 값은 useSession을 통해 ClientSide에서 사용할 수 있음
     async session({ session, token }) {
-      console.log('세션콜백 세션정보 => ', session);
-      console.log('세션콜백 토큰정보 => ', token);
+      // console.log('세션콜백 세션정보 => ', session);
+      // console.log('세션콜백 토큰정보 => ', token);
       const user = session?.user;
       if (user) {
         session.user = {
@@ -51,9 +51,9 @@ export const authOptions: NextAuthOptions = {
     },
     // jwt 토큰이 만들어지거나 업데이트 되면 실행되는 함수
     async jwt({ token, account, user }) {
-      console.log('jwt 콜백 token => ', token);
-      console.log('jwt 콜백 account => ', account);
-      console.log('jwt 콜백 user => ', user);
+      // console.log('jwt 콜백 token => ', token);
+      // console.log('jwt 콜백 account => ', account);
+      // console.log('jwt 콜백 user => ', user);
       if (user) {
         // 유저 정보가 있다면 token에는 id값이 없기때문에
         // token.id에 user.id 값을 넣어줌

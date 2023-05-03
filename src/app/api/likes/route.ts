@@ -4,7 +4,7 @@ import { withSessionUser } from '@/util/session';
 
 // 좋아요에 대한 데이터를 수정할 것이기에 PUT
 export async function PUT(req: NextRequest) {
-  withSessionUser(async (user) => {
+  return withSessionUser(async (user) => {
     // req body에 내용을 json으로 풀어서 가져옴
     const { postId, like } = await req.json();
 

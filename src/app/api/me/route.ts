@@ -3,7 +3,7 @@ import { getUserByUsername } from '@/service/user';
 import { withSessionUser } from '@/util/session';
 
 export async function GET(request: Request) {
-  withSessionUser(async (user) => {
+  return withSessionUser(async (user) => {
     return getUserByUsername(user.username).then((data) => NextResponse.json(data));
   });
 }
