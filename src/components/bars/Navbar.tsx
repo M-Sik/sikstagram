@@ -42,7 +42,7 @@ export default function Navbar() {
   return (
     <div className="flex justify-between items-center px-6">
       <Link href="/">
-        <h1 className="text-3xl font-bold">Sikstagram</h1>
+        <h1 className="text-3xl font-bold max-[768px]:text-lg">Sikstagram</h1>
       </Link>
       <nav>
         <ul className="flex gap-4 p-4 items-center">
