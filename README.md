@@ -36,7 +36,6 @@ Next.js에 대하여 공부하기 위해 진행한 프로젝트 입니다. Next.
 <br>
 
 ### 🚀 미리 보기
-<br>
 
 ### OAuth 로그인👇👇
 ![sikstagram_Oauth](https://user-images.githubusercontent.com/77043973/236225568-5113c48a-fe69-4a04-947a-addedd10b880.gif)
