@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import ColorButton from '../buttons/ColorButton';
 // tip) oAuth 사용을 위해 사용 layout.tsx 파일 바디 하위에 AuthContext.tsx 컴포넌트로 감쌋기 때문에 사용 가능
 // client 컴포넌트에서만 사용 가능함
+//
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Avatar from '../avaters/Avatar';
 
