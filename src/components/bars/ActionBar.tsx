@@ -41,12 +41,14 @@ export default function ActionBar({ post, children, onComment }: IPorps) {
     <>
       <div className="flex p-2 justify-between">
         <ToggleBtn
+          title={liked ? 'unlike' : 'like'}
           toggled={liked}
           onToggle={handleLike}
           onIcon={<HeartFillIcon />}
           offIcon={<HeartIcon />}
         />
         <ToggleBtn
+          title={bookmarked ? 'unbookmark' : 'bookmark'}
           toggled={bookmarked}
           onToggle={handleBookmark}
           onIcon={<BookmarkFillIcon />}

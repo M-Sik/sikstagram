@@ -43,7 +43,7 @@ export default function PostListCard({ post, priority = false }: IProps) {
         </p>
         {comments > 1 && (
           <button
-            className=" font-bold text-sky-600 my-2"
+            className=" font-bold text-sky-700 my-2"
             onClick={() => setOpenDialog(true)}
           >{`View all ${comments} comments`}</button>
         )}
