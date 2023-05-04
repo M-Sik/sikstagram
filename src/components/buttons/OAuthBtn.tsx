@@ -11,12 +11,13 @@ export default function OAuthBtn({ providers, callbackUrl }: Props) {
   return (
     <>
       {Object.values(providers).map(({ name, id }) => (
-        <ColorButton
-          key={id}
-          text={`Sign In with ${name}`}
-          onClick={() => signIn(id, { callbackUrl })}
-          size="big"
-        />
+        <div key={id} className="flex justify-center mt-4">
+          <ColorButton
+            text={`${name} 로그인`}
+            onClick={() => signIn(id, { callbackUrl })}
+            size="big"
+          />
+        </div>
       ))}
     </>
   );

@@ -27,7 +27,8 @@ export default async function SignPage({ searchParams: { callbackUrl } }: IProps
   const providers = (await getProviders()) ?? {};
 
   return (
-    <section className="flex justify-center mt-[30%]">
+    <section className=" mt-[10%]">
+      <h2 className="text-center font-bold text-2xl">로그인</h2>
       {/* callbackUrl이 없다면 홈으로 이동하기 위함 */}
       <OAuthBtn providers={providers} callbackUrl={callbackUrl ?? '/'} />
     </section>
