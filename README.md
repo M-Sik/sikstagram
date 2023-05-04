@@ -36,3 +36,38 @@ Next.js에 대하여 공부하기 위해 진행한 프로젝트 입니다. Next.
 <br>
 
 ### 🚀 미리 보기
+<br>
+
+### OAuth 로그인👇👇
+![sikstagram_Oauth](https://user-images.githubusercontent.com/77043973/236225568-5113c48a-fe69-4a04-947a-addedd10b880.gif)
+
+<br>
+
+### 게시글 등록👇👇
+![sikstagram_addpost](https://user-images.githubusercontent.com/77043973/236227454-f16e27d3-96c1-4cb4-9542-c721c3b62793.gif)
+
+<br>
+
+### 게시글 및 게시글 상세화면 좋아요, 북마크, 댓글👇👇
+![sikstagram_like_bookmark_comment](https://user-images.githubusercontent.com/77043973/236229580-ac8d7fe7-fa00-46a6-9657-729433e28d40.gif)
+
+<br>
+
+### Debounce를 이용한 유저 검색👇👇
+![sikstagram_user_search](https://user-images.githubusercontent.com/77043973/236235133-09f89c89-cfaa-4b97-b270-5d6d87b84f52.gif)
+
+<br>
+
+### 유저 팔로우, 언팔로우👇👇
+![sikstagram_user_follow_unfollow](https://user-images.githubusercontent.com/77043973/236235665-6c74a8c3-4b33-4e37-ad15-785c0be84538.gif)
+
+<br>
+
+### 팔로우한 유저 정보보기👇👇
+![sikstagram_followuser_info](https://user-images.githubusercontent.com/77043973/236235923-545bd6f6-14b0-4f97-918d-9dedf9d4beec.gif)
+
+<br>
+
+### 해당 유저가 쓴 게시글, 북마크한 글, 좋아요한 글 조회👇👇
+![sikstagram_mypost_bookmarked_liked](https://user-images.githubusercontent.com/77043973/236236293-2088b8c6-87ad-4998-aba6-7bfbc57dccd6.gif)
+
